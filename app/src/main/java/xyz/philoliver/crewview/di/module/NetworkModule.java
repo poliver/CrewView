@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.philoliver.crewview.network.SlackService;
+import xyz.philoliver.crewview.network.TokenInterceptor;
 
 /**
  * Created by Phil on 3/24/17.
@@ -24,8 +25,9 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    SlackService provideSlackService() {
+    SlackService provideSlackService(TokenInterceptor tokenInterceptor) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(tokenInterceptor)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
