@@ -31,7 +31,7 @@ public class TokenInterceptor implements Interceptor {
                 .addQueryParameter("token", BuildConfig.API_KEY)
                 .build();
 
-        request.newBuilder()
+        request = request.newBuilder()
                 .url(httpUrl)
                 .build();
 

@@ -13,7 +13,7 @@ import xyz.philoliver.crewview.model.UsersResponse;
 
 public interface SlackService {
 
-    @GET("methods/users.list")
+    @GET("users.list")
     Observable<UsersResponse> getUsers(@Query("presence") boolean presence);
 
 }

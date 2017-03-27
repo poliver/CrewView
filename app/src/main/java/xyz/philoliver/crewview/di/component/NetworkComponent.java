@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import xyz.philoliver.crewview.di.module.NetworkModule;
-import xyz.philoliver.crewview.ui.UserListActivity;
+import xyz.philoliver.crewview.ui.users.UserListActivity;
 
 /**
  * Created by Phil on 3/26/17.

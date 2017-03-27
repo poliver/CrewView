@@ -20,7 +20,7 @@ public class CrewViewApplication extends Application {
         super.onCreate();
 
         networkComponent = DaggerNetworkComponent.builder()
-                .networkModule(new NetworkModule("https://slack.com/api/"))
+                .networkModule(new NetworkModule(getString(R.string.base_url)))
                 .build();
     }
 

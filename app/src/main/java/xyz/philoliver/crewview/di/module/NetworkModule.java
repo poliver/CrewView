@@ -5,7 +5,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.philoliver.crewview.network.SlackService;
 import xyz.philoliver.crewview.network.TokenInterceptor;
@@ -26,7 +28,11 @@ public class NetworkModule {
     @Provides
     @Singleton
     SlackService provideSlackService(TokenInterceptor tokenInterceptor) {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
                 .addInterceptor(tokenInterceptor)
                 .build();
 
@@ -34,6 +40,7 @@ public class NetworkModule {
                 .client(okHttpClient)
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         return retrofit.create(SlackService.class);
