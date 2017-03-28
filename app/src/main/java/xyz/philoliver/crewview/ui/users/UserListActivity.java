@@ -16,6 +16,7 @@ import xyz.philoliver.crewview.CrewViewApplication;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.UsersResponse;
 import xyz.philoliver.crewview.network.SlackService;
+import android.support.v7.widget.DividerItemDecoration;
 
 public class UserListActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class UserListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         usersSubscription = slackService.getUsers(true)
                 .subscribeOn(Schedulers.newThread())

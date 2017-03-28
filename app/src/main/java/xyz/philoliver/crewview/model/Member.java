@@ -1,11 +1,13 @@
 
 package xyz.philoliver.crewview.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Member implements Serializable
+public class Member implements Parcelable
 {
 
     @SerializedName("id")
@@ -19,7 +21,7 @@ public class Member implements Serializable
     private String name;
     @SerializedName("deleted")
     @Expose
-    private boolean deleted;
+    private Boolean deleted;
     @SerializedName("status")
     @Expose
     private Object status;
@@ -37,35 +39,82 @@ public class Member implements Serializable
     private String tzLabel;
     @SerializedName("tz_offset")
     @Expose
-    private long tzOffset;
+    private Long tzOffset;
     @SerializedName("profile")
     @Expose
     private Profile profile;
     @SerializedName("is_admin")
     @Expose
-    private boolean isAdmin;
+    private Boolean isAdmin;
     @SerializedName("is_owner")
     @Expose
-    private boolean isOwner;
+    private Boolean isOwner;
     @SerializedName("is_primary_owner")
     @Expose
-    private boolean isPrimaryOwner;
+    private Boolean isPrimaryOwner;
     @SerializedName("is_restricted")
     @Expose
-    private boolean isRestricted;
+    private Boolean isRestricted;
     @SerializedName("is_ultra_restricted")
     @Expose
-    private boolean isUltraRestricted;
+    private Boolean isUltraRestricted;
     @SerializedName("is_bot")
     @Expose
-    private boolean isBot;
+    private Boolean isBot;
     @SerializedName("updated")
     @Expose
-    private long updated;
+    private Long updated;
     @SerializedName("has_2fa")
     @Expose
-    private boolean has2fa;
-    private final static long serialVersionUID = -3598479459267190375L;
+    private Boolean has2fa;
+    @SerializedName("presence")
+    @Expose
+    private Presence presence;
+
+    public enum Presence {
+        @SerializedName("active")
+        ACTIVE,
+        @SerializedName("away")
+        AWAY
+    }
+
+    public final static Parcelable.Creator<Member> CREATOR = new Creator<Member>() {
+
+
+        @SuppressWarnings({
+            "unchecked"
+        })
+        public Member createFromParcel(Parcel in) {
+            Member instance = new Member();
+            instance.id = ((String) in.readValue((String.class.getClassLoader())));
+            instance.teamId = ((String) in.readValue((String.class.getClassLoader())));
+            instance.name = ((String) in.readValue((String.class.getClassLoader())));
+            instance.deleted = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.status = ((Object) in.readValue((Object.class.getClassLoader())));
+            instance.color = ((String) in.readValue((String.class.getClassLoader())));
+            instance.realName = ((String) in.readValue((String.class.getClassLoader())));
+            instance.tz = ((Object) in.readValue((Object.class.getClassLoader())));
+            instance.tzLabel = ((String) in.readValue((String.class.getClassLoader())));
+            instance.tzOffset = ((Long) in.readValue((Long.class.getClassLoader())));
+            instance.profile = ((Profile) in.readValue((Profile.class.getClassLoader())));
+            instance.isAdmin = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.isOwner = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.isPrimaryOwner = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.isRestricted = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.isUltraRestricted = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.isBot = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.updated = ((Long) in.readValue((Long.class.getClassLoader())));
+            instance.has2fa = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.presence = Presence.values()[in.readInt()];
+            return instance;
+        }
+
+        public Member[] newArray(int size) {
+            return (new Member[size]);
+        }
+
+    }
+    ;
 
     public String getId() {
         return id;
@@ -91,11 +140,11 @@ public class Member implements Serializable
         this.name = name;
     }
 
-    public boolean isDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 
@@ -139,11 +188,11 @@ public class Member implements Serializable
         this.tzLabel = tzLabel;
     }
 
-    public long getTzOffset() {
+    public Long getTzOffset() {
         return tzOffset;
     }
 
-    public void setTzOffset(long tzOffset) {
+    public void setTzOffset(Long tzOffset) {
         this.tzOffset = tzOffset;
     }
 
@@ -155,68 +204,103 @@ public class Member implements Serializable
         this.profile = profile;
     }
 
-    public boolean isIsAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
+    public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
-    public boolean isIsOwner() {
+    public Boolean getIsOwner() {
         return isOwner;
     }
 
-    public void setIsOwner(boolean isOwner) {
+    public void setIsOwner(Boolean isOwner) {
         this.isOwner = isOwner;
     }
 
-    public boolean isIsPrimaryOwner() {
+    public Boolean getIsPrimaryOwner() {
         return isPrimaryOwner;
     }
 
-    public void setIsPrimaryOwner(boolean isPrimaryOwner) {
+    public void setIsPrimaryOwner(Boolean isPrimaryOwner) {
         this.isPrimaryOwner = isPrimaryOwner;
     }
 
-    public boolean isIsRestricted() {
+    public Boolean getIsRestricted() {
         return isRestricted;
     }
 
-    public void setIsRestricted(boolean isRestricted) {
+    public void setIsRestricted(Boolean isRestricted) {
         this.isRestricted = isRestricted;
     }
 
-    public boolean isIsUltraRestricted() {
+    public Boolean getIsUltraRestricted() {
         return isUltraRestricted;
     }
 
-    public void setIsUltraRestricted(boolean isUltraRestricted) {
+    public void setIsUltraRestricted(Boolean isUltraRestricted) {
         this.isUltraRestricted = isUltraRestricted;
     }
 
-    public boolean isIsBot() {
+    public Boolean getIsBot() {
         return isBot;
     }
 
-    public void setIsBot(boolean isBot) {
+    public void setIsBot(Boolean isBot) {
         this.isBot = isBot;
     }
 
-    public long getUpdated() {
+    public Long getUpdated() {
         return updated;
     }
 
-    public void setUpdated(long updated) {
+    public void setUpdated(Long updated) {
         this.updated = updated;
     }
 
-    public boolean isHas2fa() {
+    public Boolean getHas2fa() {
         return has2fa;
     }
 
-    public void setHas2fa(boolean has2fa) {
+    public void setHas2fa(Boolean has2fa) {
         this.has2fa = has2fa;
+    }
+
+    public Presence getPresence() {
+        return presence;
+    }
+
+    public void setPresence(Presence presence) {
+        this.presence = presence;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(id);
+        dest.writeValue(teamId);
+        dest.writeValue(name);
+        dest.writeValue(deleted);
+        dest.writeValue(status);
+        dest.writeValue(color);
+        dest.writeValue(realName);
+        dest.writeValue(tz);
+        dest.writeValue(tzLabel);
+        dest.writeValue(tzOffset);
+        dest.writeValue(profile);
+        dest.writeValue(isAdmin);
+        dest.writeValue(isOwner);
+        dest.writeValue(isPrimaryOwner);
+        dest.writeValue(isRestricted);
+        dest.writeValue(isUltraRestricted);
+        dest.writeValue(isBot);
+        dest.writeValue(updated);
+        dest.writeValue(has2fa);
+        dest.writeValue(presence == null? Presence.AWAY.ordinal() : presence.ordinal());
+    }
+
+    public int describeContents() {
+        return  0;
     }
 
 }

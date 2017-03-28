@@ -3,7 +3,7 @@ apply from: 'config.gradle'
 buildscript {
     ext {
         // library version variables
-        androidSupport = '25.3.0'
+        androidSupport = '25.3.1'
         dagger = '2.10'
         retrofit = '2.2.0'
         butterKnife = '8.5.1'

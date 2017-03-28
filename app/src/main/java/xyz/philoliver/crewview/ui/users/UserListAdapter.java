@@ -1,18 +1,24 @@
 package xyz.philoliver.crewview.ui.users;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.Member;
+import xyz.philoliver.crewview.model.Profile;
 
 /**
  * Created by Phil on 3/26/17.
@@ -44,8 +50,14 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
 
     class UserViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.avatar)
+        ImageView avatar;
+
         @BindView(R.id.name)
         TextView name;
+
+        @BindView(R.id.status)
+        ImageView status;
 
         public UserViewHolder(View itemView) {
             super(itemView);
@@ -53,7 +65,18 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
         }
 
         public void bind(Member user) {
-            name.setText(user.getName());
+            Context context = itemView.getContext();
+            Profile profile = user.getProfile();
+
+            Glide.with(context)
+                    .load(profile.getImage72())
+                    .centerCrop()
+                    .bitmapTransform(new CropCircleTransformation(context))
+                    .crossFade()
+                    .into(avatar);
+
+            name.setText(user.getRealName());
+            status.setActivated(profile.getAlwaysActive() == Boolean.TRUE || user.getPresence() == Member.Presence.ACTIVE);
         }
 
     }

@@ -1,11 +1,13 @@
 
 package xyz.philoliver.crewview.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Profile implements Serializable
+public class Profile implements Parcelable
 {
 
     @SerializedName("first_name")
@@ -58,11 +60,45 @@ public class Profile implements Serializable
     private String image512;
     @SerializedName("always_active")
     @Expose
-    private boolean alwaysActive;
+    private Boolean alwaysActive;
     @SerializedName("fields")
     @Expose
     private Object fields;
-    private final static long serialVersionUID = 7420908830177210663L;
+    public final static Parcelable.Creator<Profile> CREATOR = new Creator<Profile>() {
+
+
+        @SuppressWarnings({
+            "unchecked"
+        })
+        public Profile createFromParcel(Parcel in) {
+            Profile instance = new Profile();
+            instance.firstName = ((String) in.readValue((String.class.getClassLoader())));
+            instance.lastName = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image24 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image32 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image48 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image72 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image192 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.imageOriginal = ((String) in.readValue((String.class.getClassLoader())));
+            instance.title = ((String) in.readValue((String.class.getClassLoader())));
+            instance.skype = ((String) in.readValue((String.class.getClassLoader())));
+            instance.phone = ((String) in.readValue((String.class.getClassLoader())));
+            instance.avatarHash = ((String) in.readValue((String.class.getClassLoader())));
+            instance.realName = ((String) in.readValue((String.class.getClassLoader())));
+            instance.realNameNormalized = ((String) in.readValue((String.class.getClassLoader())));
+            instance.email = ((String) in.readValue((String.class.getClassLoader())));
+            instance.image512 = ((String) in.readValue((String.class.getClassLoader())));
+            instance.alwaysActive = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            instance.fields = ((Object) in.readValue((Object.class.getClassLoader())));
+            return instance;
+        }
+
+        public Profile[] newArray(int size) {
+            return (new Profile[size]);
+        }
+
+    }
+    ;
 
     public String getFirstName() {
         return firstName;
@@ -192,11 +228,11 @@ public class Profile implements Serializable
         this.image512 = image512;
     }
 
-    public boolean isAlwaysActive() {
+    public Boolean getAlwaysActive() {
         return alwaysActive;
     }
 
-    public void setAlwaysActive(boolean alwaysActive) {
+    public void setAlwaysActive(Boolean alwaysActive) {
         this.alwaysActive = alwaysActive;
     }
 
@@ -206,6 +242,31 @@ public class Profile implements Serializable
 
     public void setFields(Object fields) {
         this.fields = fields;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(firstName);
+        dest.writeValue(lastName);
+        dest.writeValue(image24);
+        dest.writeValue(image32);
+        dest.writeValue(image48);
+        dest.writeValue(image72);
+        dest.writeValue(image192);
+        dest.writeValue(imageOriginal);
+        dest.writeValue(title);
+        dest.writeValue(skype);
+        dest.writeValue(phone);
+        dest.writeValue(avatarHash);
+        dest.writeValue(realName);
+        dest.writeValue(realNameNormalized);
+        dest.writeValue(email);
+        dest.writeValue(image512);
+        dest.writeValue(alwaysActive);
+        dest.writeValue(fields);
+    }
+
+    public int describeContents() {
+        return  0;
     }
 
 }

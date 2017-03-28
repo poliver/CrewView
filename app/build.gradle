@@ -37,6 +37,7 @@ dependencies {
     // Android support libs
     compile "com.android.support:appcompat-v7:$androidSupport"
     compile "com.android.support:recyclerview-v7:$androidSupport"
+    compile "com.android.support:design:$androidSupport"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Dagger
@@ -56,6 +57,10 @@ dependencies {
     // Butter Knife
     compile "com.jakewharton:butterknife:$butterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+
+    // Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
 
     testCompile 'junit:junit:4.12'
 }

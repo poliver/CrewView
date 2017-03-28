@@ -1,30 +1,51 @@
 
 package xyz.philoliver.crewview.model;
 
-import java.io.Serializable;
 import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UsersResponse implements Serializable
+public class UsersResponse implements Parcelable
 {
 
     @SerializedName("ok")
     @Expose
-    private boolean ok;
+    private Boolean ok;
     @SerializedName("members")
     @Expose
     private List<Member> members = null;
     @SerializedName("cache_ts")
     @Expose
-    private long cacheTs;
-    private final static long serialVersionUID = -8549329281924826022L;
+    private Long cacheTs;
+    public final static Parcelable.Creator<UsersResponse> CREATOR = new Creator<UsersResponse>() {
 
-    public boolean isOk() {
+
+        @SuppressWarnings({
+            "unchecked"
+        })
+        public UsersResponse createFromParcel(Parcel in) {
+            UsersResponse instance = new UsersResponse();
+            instance.ok = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+            in.readList(instance.members, (xyz.philoliver.crewview.model.Member.class.getClassLoader()));
+            instance.cacheTs = ((Long) in.readValue((Long.class.getClassLoader())));
+            return instance;
+        }
+
+        public UsersResponse[] newArray(int size) {
+            return (new UsersResponse[size]);
+        }
+
+    }
+    ;
+
+    public Boolean getOk() {
         return ok;
     }
 
-    public void setOk(boolean ok) {
+    public void setOk(Boolean ok) {
         this.ok = ok;
     }
 
@@ -36,12 +57,22 @@ public class UsersResponse implements Serializable
         this.members = members;
     }
 
-    public long getCacheTs() {
+    public Long getCacheTs() {
         return cacheTs;
     }
 
-    public void setCacheTs(long cacheTs) {
+    public void setCacheTs(Long cacheTs) {
         this.cacheTs = cacheTs;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(ok);
+        dest.writeList(members);
+        dest.writeValue(cacheTs);
+    }
+
+    public int describeContents() {
+        return  0;
     }
 
 }
