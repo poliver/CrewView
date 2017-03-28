@@ -1,6 +1,7 @@
 package xyz.philoliver.crewview.ui.users;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
 
     public UserListAdapter(List<Member> users) {
         this.users = users;
+        setHasStableIds(true);
     }
 
     @Override
@@ -77,6 +79,10 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
 
             name.setText(user.getRealName());
             status.setActivated(profile.getAlwaysActive() == Boolean.TRUE || user.getPresence() == Member.Presence.ACTIVE);
+
+            itemView.setOnClickListener(view -> {
+                Snackbar.make(view, "Clicked " + user.getName(), Snackbar.LENGTH_SHORT).show();
+            });
         }
 
     }
