@@ -15,14 +15,14 @@
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
         android:layout_marginEnd="@dimen/spacing"
-        android:layout_marginRight="@dimen/spacing"
-        android:src="@drawable/selector_circle_status"/>
+        android:layout_marginRight="@dimen/spacing"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textSize="@dimen/row_primary_text"
         tools:text="Phil Oliver"/>
 
     <ImageView

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <dimen name="row_primary_text">16sp</dimen>
 
     <dimen name="spacing">16dp</dimen>
     <dimen name="status_indicator_radius">12dp</dimen>
