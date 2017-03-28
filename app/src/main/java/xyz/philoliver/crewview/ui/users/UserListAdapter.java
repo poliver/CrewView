@@ -1,6 +1,7 @@
 package xyz.philoliver.crewview.ui.users;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.Member;
 import xyz.philoliver.crewview.model.Profile;
@@ -68,12 +69,13 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
 
         public void bind(Member user) {
             Context context = itemView.getContext();
+            Resources resources = context.getResources();
             Profile profile = user.getProfile();
 
             Glide.with(context)
                     .load(profile.getImage72())
                     .centerCrop()
-                    .bitmapTransform(new CropCircleTransformation(context))
+                    .bitmapTransform(new RoundedCornersTransformation(context, resources.getDimensionPixelSize(R.dimen.avatar_corner_radius), 0))
                     .crossFade()
                     .into(avatar);
 
