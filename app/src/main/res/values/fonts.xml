@@ -2,5 +2,6 @@
 <resources>
     
     <string name="lato_regular">fonts/Lato-Regular.ttf</string>
-    
+    <string name="lato_bold">fonts/Lato-Bold.ttf</string>
+
 </resources>

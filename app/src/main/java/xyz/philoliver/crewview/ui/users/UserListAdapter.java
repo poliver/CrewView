@@ -83,7 +83,7 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             status.setActivated(profile.getAlwaysActive() == Boolean.TRUE || user.getPresence() == Member.Presence.ACTIVE);
 
             itemView.setOnClickListener(view -> {
-                Snackbar.make(view, "Clicked " + user.getName(), Snackbar.LENGTH_SHORT).show();
+                context.startActivity(UserDetailsActivity.getIntent(context, user));
             });
         }
 

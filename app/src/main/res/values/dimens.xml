@@ -8,5 +8,6 @@
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="avatar_corner_radius">2dp</dimen>
     <dimen name="row_height_min">72dp</dimen>
+    <dimen name="divider_thickness">1dp</dimen>
 
 </resources>
