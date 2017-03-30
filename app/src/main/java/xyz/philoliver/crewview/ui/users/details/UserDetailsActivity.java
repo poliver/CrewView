@@ -1,9 +1,10 @@
-package xyz.philoliver.crewview.ui.users;
+package xyz.philoliver.crewview.ui.users.details;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +27,17 @@ import butterknife.ButterKnife;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.Member;
 import xyz.philoliver.crewview.model.Profile;
-import xyz.philoliver.crewview.ui.users.UserDetailsAdapter.UserDetail;
+import xyz.philoliver.crewview.ui.CrewViewActivity;
+import xyz.philoliver.crewview.util.DeviceUtils;
 import xyz.philoliver.crewview.util.UserUtils;
 
 import static android.view.View.GONE;
 
 public class UserDetailsActivity extends CrewViewActivity {
 
-    public static String USER_KEY = "user";
-    public static String SYSTEM_BAR_COLOR_KEY = "systemBarColor";
-    public static String TOOLBAR_COLOR_KEY = "toolbarColor";
+    public static final String USER_KEY = "user";
+    public static final String SYSTEM_BAR_COLOR_KEY = "systemBarColor";
+    public static final String TOOLBAR_COLOR_KEY = "toolbarColor";
 
 
     public static Intent getIntent(Context context, Member user) {
@@ -70,6 +75,8 @@ public class UserDetailsActivity extends CrewViewActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
 
+        supportPostponeEnterTransition();
+
         if (!getIntent().hasExtra(USER_KEY)) {
             throw new IllegalArgumentException("User must be provided to UserDetailsActivity");
         }
@@ -79,12 +86,6 @@ public class UserDetailsActivity extends CrewViewActivity {
         setupToolbar();
 
         user = getIntent().getExtras().getParcelable(USER_KEY);
-
-        Glide.with(this)
-                .load(user.getProfile().getImageOriginal())
-                .dontAnimate()
-                .centerCrop()
-                .into(avatar);
 
         setupUserDetails();
 
@@ -101,10 +102,33 @@ public class UserDetailsActivity extends CrewViewActivity {
     }
 
     public void setupUserDetails() {
-        List<UserDetail> details = new ArrayList<>();
+        List<UserDetailsAdapter.UserDetail> details = new ArrayList<>();
 
         // Create a list of the details to show, if they exist
         if (getIntent().hasExtra(USER_KEY)) {
+            ViewCompat.setTransitionName(avatar, getString(R.string.avatar_transition));
+
+            int size = DeviceUtils.screenWidth(this);
+            Glide.with(this)
+                    .load(user.getProfile().getImageOriginal())
+                    .override(size, size) // keep aspect ratio square (same as user list screen), so transition looks fluid
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            // so app doesn't get deadlocked
+                            supportStartPostponedEnterTransition();
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            supportStartPostponedEnterTransition();
+                            return false;
+                        }
+                    })
+                    .dontAnimate()
+                    .into(avatar);
+
             name.setText(user.getRealName());
 
             String uname = user.getName();
@@ -132,9 +156,9 @@ public class UserDetailsActivity extends CrewViewActivity {
         }
     }
 
-    private void addDetail(String detail, String label, List<UserDetail> details) {
+    private void addDetail(String detail, String label, List<UserDetailsAdapter.UserDetail> details) {
         if (!TextUtils.isEmpty(detail)) {
-            details.add(new UserDetail(detail, label));
+            details.add(new UserDetailsAdapter.UserDetail(detail, label));
         }
     }
 

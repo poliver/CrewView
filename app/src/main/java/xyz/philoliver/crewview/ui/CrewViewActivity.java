@@ -1,4 +1,4 @@
-package xyz.philoliver.crewview.ui.users;
+package xyz.philoliver.crewview.ui;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;

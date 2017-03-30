@@ -1,8 +1,11 @@
 package xyz.philoliver.crewview.ui.users;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -21,6 +24,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.Member;
 import xyz.philoliver.crewview.model.Profile;
+import xyz.philoliver.crewview.ui.users.details.UserDetailsActivity;
 import xyz.philoliver.crewview.util.UserUtils;
 
 /**
@@ -73,19 +77,30 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             Resources resources = context.getResources();
             Profile profile = user.getProfile();
 
+            ViewCompat.setTransitionName(avatar, context.getString(R.string.avatar_transition));
+
+            int size = resources.getDimensionPixelSize(R.dimen.avatar_size);
             //TODO: image not present?
             Glide.with(context)
                     .load(profile.getImage72())
-                    .centerCrop()
+                    .override(size, size)
+                    //.centerCrop()
                     .bitmapTransform(new RoundedCornersTransformation(context, resources.getDimensionPixelSize(R.dimen.avatar_corner_radius), 0))
-                    .crossFade()
+                    //.crossFade()
                     .into(avatar);
 
             name.setText(user.getRealName());
             status.setActivated(UserUtils.isActive(user));
 
             itemView.setOnClickListener(view -> {
-                context.startActivity(UserDetailsActivity.getIntent(context, user));
+                Intent intent = UserDetailsActivity.getIntent(context, user);
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        (Activity) context,
+                        avatar,
+                        ViewCompat.getTransitionName(avatar));
+
+                context.startActivity(intent, options.toBundle());
             });
         }
 

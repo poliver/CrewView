@@ -1,4 +1,4 @@
-package xyz.philoliver.crewview.ui.users;
+package xyz.philoliver.crewview.ui.users.details;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

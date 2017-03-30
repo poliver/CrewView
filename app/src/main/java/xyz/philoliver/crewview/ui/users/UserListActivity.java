@@ -16,6 +16,7 @@ import xyz.philoliver.crewview.CrewViewApplication;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.UsersResponse;
 import xyz.philoliver.crewview.network.SlackService;
+import xyz.philoliver.crewview.ui.CrewViewActivity;
 
 public class UserListActivity extends CrewViewActivity {
 

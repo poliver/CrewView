@@ -7,6 +7,6 @@
     <dimen name="avatar_corner_radius">2dp</dimen>
     <dimen name="row_height_min">72dp</dimen>
     <dimen name="divider_thickness">1dp</dimen>
-    <dimen name="details_header_heigh">300dp</dimen>
+    <dimen name="details_backdrop_height">300dp</dimen>
 
 </resources>
