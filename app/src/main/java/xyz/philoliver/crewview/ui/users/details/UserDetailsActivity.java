@@ -112,6 +112,7 @@ public class UserDetailsActivity extends CrewViewActivity {
             Glide.with(this)
                     .load(user.getProfile().getImageOriginal())
                     .override(size, size) // keep aspect ratio square (same as user list screen), so transition looks fluid
+                    .placeholder(R.drawable.slack)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

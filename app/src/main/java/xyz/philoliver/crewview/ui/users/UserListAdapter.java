@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,9 +85,8 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             Glide.with(context)
                     .load(profile.getImage72())
                     .override(size, size)
-                    //.centerCrop()
                     .bitmapTransform(new RoundedCornersTransformation(context, resources.getDimensionPixelSize(R.dimen.avatar_corner_radius), 0))
-                    //.crossFade()
+                    .crossFade()
                     .into(avatar);
 
             name.setText(user.getRealName());
@@ -95,12 +95,17 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             itemView.setOnClickListener(view -> {
                 Intent intent = UserDetailsActivity.getIntent(context, user);
 
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        (Activity) context,
-                        avatar,
-                        ViewCompat.getTransitionName(avatar));
+                // Don't set up a transition if we know the 'to' image won't match
+                if (TextUtils.isEmpty(profile.getImageOriginal())) {
+                    context.startActivity(intent);
+                } else {
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            (Activity) context,
+                            avatar,
+                            ViewCompat.getTransitionName(avatar));
 
-                context.startActivity(intent, options.toBundle());
+                    context.startActivity(intent, options.toBundle());
+                }
             });
         }
 
