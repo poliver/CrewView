@@ -21,8 +21,9 @@ ext {
 9. [Stetho](https://github.com/facebook/stetho) - I love the ease with which Stetho allows me to monitor netword traffic and storage on my Android devices. Most of the time, it's a good enough replacement for CharlesProxy.
 
 ### Future considerations
-1. I would have liked to use Android's `Palette` library to change the user detail screen toolbar color based on the use image.
-2. Put more time into the user detail page `CoordinatorLayout` and the avatar image transition. Perhaps, add a transition for the user's name.
-3. Learn more about the backend I worked with to clean up some client-side issues that can arise while consuming it. Mostly relating to which fields are required and which aren't
-4. UI Testing with Espresso
-5. Add actions to user detail page, i.e. call, email , send message, open in Slack
+1. Network error handling
+2. I would have liked to use Android's `Palette` library to change the user detail screen toolbar color based on the use image.
+3. Put more time into the user detail page `CoordinatorLayout` and the avatar image transition. Perhaps, add a transition for the user's name.
+4. Learn more about the backend I worked with to clean up some client-side issues that can arise while consuming it. Mostly relating to which fields are required and which aren't
+5. UI Testing with Espresso
+6. Add actions to user detail page, i.e. call, email , send message, open in Slack
