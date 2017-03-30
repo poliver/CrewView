@@ -11,7 +11,7 @@ ext {
 
 ### Libraries I used
 1. [Android support libs](https://developer.android.com/topic/libraries/support-library/index.html) - I frequently use the support libs to get backward compatibility for newer Android features like `RecyclerView` and Shared Element Transitions, but I don't get to use `CoordinatorLayout` too often. I knew the user detail page would be a good place to play with it.
-2. [Dagger 2](https://github.com/google/dagger) - Dagger 2 is Google's fork of Square's well-known dependency injection library, Dagger. Even though its usage in this project was probably overkill, it simplifies my usage of my Retrofit interface so that it can easily be swapped out for testing, different endpoints, etc.
+2. [Dagger 2](https://github.com/google/dagger) - Dagger 2 is Google's fork of Square's well-known dependency injection library, Dagger. Even though its usage in this project was probably overkill, it simplifies my usage of my Retrofit interface so that it can easily be swapped out for mocking, different endpoints, etc.
 3. [Retrofit 2](https://github.com/square/retrofit) - Retrofit 2 is awesome for HTTP API communication. I typically use the GSON converter for request/response serialization. And for this project, I was able to try out the Rx Call adapter, which streams server responses to an Rx Observable.
 4. [RxAndroid](https://github.com/ReactiveX/RxAndroid) - I used RxAndroid in conjunction with Retrofit 2 to observe API response streams
 5. [Retrolambda Plugin](https://github.com/evant/gradle-retrolambda) - I use this gradle plugin to build code that leverages lambdas
