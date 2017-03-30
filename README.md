@@ -25,3 +25,4 @@ ext {
 2. Put more time into the user detail page `CoordinatorLayout` and the avatar image transition. Perhaps, add a transition for the user's name.
 3. Learn more about the backend I worked with to clean up some client-side issues that can arise while consuming it. Mostly relating to which fields are required and which aren't
 4. UI Testing with Espresso
+5. Add actions to user detail page, i.e. call, email , send message, open in Slack
