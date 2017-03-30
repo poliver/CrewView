@@ -37,9 +37,6 @@ import static android.view.View.GONE;
 public class UserDetailsActivity extends CrewViewActivity {
 
     public static final String USER_KEY = "user";
-    public static final String SYSTEM_BAR_COLOR_KEY = "systemBarColor";
-    public static final String TOOLBAR_COLOR_KEY = "toolbarColor";
-
 
     public static Intent getIntent(Context context, Member user) {
         Intent intent = new Intent(context, UserDetailsActivity.class);
@@ -89,7 +86,6 @@ public class UserDetailsActivity extends CrewViewActivity {
         user = getIntent().getExtras().getParcelable(USER_KEY);
 
         setupUserDetails();
-
     }
 
     private void setupToolbar() {
@@ -105,58 +101,55 @@ public class UserDetailsActivity extends CrewViewActivity {
     public void setupUserDetails() {
         List<UserDetailsAdapter.UserDetail> details = new ArrayList<>();
 
-        // Create a list of the details to show, if they exist
-        if (getIntent().hasExtra(USER_KEY)) {
-            ViewCompat.setTransitionName(avatar, getString(R.string.avatar_transition));
+        ViewCompat.setTransitionName(avatar, getString(R.string.avatar_transition));
 
-            int size = DeviceUtils.screenWidth(this);
-            Glide.with(this)
-                    .load(user.getProfile().getImageOriginal())
-                    .override(size, size) // keep aspect ratio square (same as user list screen), so transition looks fluid
-                    .placeholder(R.drawable.slack)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            // so app doesn't get deadlocked
-                            supportStartPostponedEnterTransition();
-                            return false;
-                        }
+        int size = DeviceUtils.screenWidth(this);
+        Glide.with(this)
+                .load(user.getProfile().getImageOriginal())
+                .override(size, size) // keep aspect ratio square (same as user list screen), so transition looks fluid
+                .placeholder(R.drawable.slack)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        // so app doesn't get deadlocked
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
 
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            // now that the avatar image is loaded, proceed with the shared element transition
-                            supportStartPostponedEnterTransition();
-                            return false;
-                        }
-                    })
-                    .dontAnimate()
-                    .into(avatar);
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        // now that the avatar image is loaded, proceed with the shared element transition
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+                })
+                .dontAnimate()
+                .into(avatar);
 
-            name.setText(user.getRealName());
+        name.setText(user.getRealName());
 
-            String uname = user.getName();
-            if (TextUtils.isEmpty(uname)) {
-                username.setVisibility(GONE);
-            } else {
-                username.setText(getString(R.string.username, uname));
-            }
-
-            status.setActivated(UserUtils.isActive(user));
-
-            Profile profile = user.getProfile();
-
-            addDetail(profile.getTitle(), "Title", details);
-
-            String timeZone = user.getTz();
-            if (TextUtils.isEmpty(timeZone)) {
-                timeZone = user.getTzLabel();
-            }
-
-            addDetail(timeZone, "Timezone", details);
-            addDetail(profile.getEmail(), "Email", details);
-            addDetail(profile.getPhone(), "Phone", details);
-
+        String uname = user.getName();
+        if (TextUtils.isEmpty(uname)) {
+            username.setVisibility(GONE);
+        } else {
+            username.setText(getString(R.string.username, uname));
         }
+
+        status.setActivated(UserUtils.isActive(user));
+
+        Profile profile = user.getProfile();
+
+        // Create a list of the details to show, if they exist
+        addDetail(profile.getTitle(), "Title", details);
+
+        String timeZone = user.getTz();
+        if (TextUtils.isEmpty(timeZone)) {
+            timeZone = user.getTzLabel();
+        }
+
+        addDetail(timeZone, "Timezone", details);
+        addDetail(profile.getEmail(), "Email", details);
+        addDetail(profile.getPhone(), "Phone", details);
 
         if (!details.isEmpty()) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -173,6 +166,7 @@ public class UserDetailsActivity extends CrewViewActivity {
 
     /**
      * Overrides the default behavior of a home press to be the same as pressing the device back button.
+     *
      * @param item the menu item that was selected
      * @return
      */
