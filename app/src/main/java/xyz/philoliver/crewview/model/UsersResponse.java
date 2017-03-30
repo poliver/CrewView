@@ -4,7 +4,7 @@ package xyz.philoliver.crewview.model;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,7 +16,7 @@ public class UsersResponse implements Parcelable
     private Boolean ok;
     @SerializedName("members")
     @Expose
-    private List<Member> members = null;
+    private List<User> users = null;
     @SerializedName("cache_ts")
     @Expose
     private Long cacheTs;
@@ -29,7 +29,7 @@ public class UsersResponse implements Parcelable
         public UsersResponse createFromParcel(Parcel in) {
             UsersResponse instance = new UsersResponse();
             instance.ok = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-            in.readList(instance.members, (xyz.philoliver.crewview.model.Member.class.getClassLoader()));
+            in.readList(instance.users, (User.class.getClassLoader()));
             instance.cacheTs = ((Long) in.readValue((Long.class.getClassLoader())));
             return instance;
         }
@@ -49,12 +49,12 @@ public class UsersResponse implements Parcelable
         this.ok = ok;
     }
 
-    public List<Member> getMembers() {
-        return members;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setMembers(List<Member> members) {
-        this.members = members;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Long getCacheTs() {
@@ -67,7 +67,7 @@ public class UsersResponse implements Parcelable
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(ok);
-        dest.writeList(members);
+        dest.writeList(users);
         dest.writeValue(cacheTs);
     }
 

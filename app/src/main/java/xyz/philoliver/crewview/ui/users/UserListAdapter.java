@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import xyz.philoliver.crewview.R;
-import xyz.philoliver.crewview.model.Member;
+import xyz.philoliver.crewview.model.User;
 import xyz.philoliver.crewview.model.Profile;
 import xyz.philoliver.crewview.ui.users.details.UserDetailsActivity;
 import xyz.philoliver.crewview.util.UserUtils;
@@ -34,9 +34,9 @@ import xyz.philoliver.crewview.util.UserUtils;
 
 public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
 
-    private List<Member> users;
+    private List<User> users;
 
-    public UserListAdapter(List<Member> users) {
+    public UserListAdapter(List<User> users) {
         this.users = users;
         setHasStableIds(true);
     }
@@ -78,7 +78,7 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Member user) {
+        public void bind(User user) {
             Context context = itemView.getContext();
             Resources resources = context.getResources();
             Profile profile = user.getProfile();

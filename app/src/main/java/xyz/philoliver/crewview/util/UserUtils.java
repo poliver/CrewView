@@ -2,7 +2,7 @@ package xyz.philoliver.crewview.util;
 
 import android.support.annotation.NonNull;
 
-import xyz.philoliver.crewview.model.Member;
+import xyz.philoliver.crewview.model.User;
 import xyz.philoliver.crewview.model.Profile;
 
 /**
@@ -11,10 +11,10 @@ import xyz.philoliver.crewview.model.Profile;
 
 public class UserUtils {
 
-    public static boolean isActive(@NonNull Member user) {
+    public static boolean isActive(@NonNull User user) {
         Profile profile = user.getProfile();
 
-        return (profile != null && profile.getAlwaysActive() == Boolean.TRUE) || user.getPresence() == Member.Presence.ACTIVE;
+        return (profile != null && profile.getAlwaysActive() == Boolean.TRUE) || user.getPresence() == User.Presence.ACTIVE;
     }
 
 }

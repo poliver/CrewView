@@ -3,11 +3,11 @@ package xyz.philoliver.crewview.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Member implements Parcelable
+public class User implements Parcelable
 {
 
     @SerializedName("id")
@@ -78,14 +78,14 @@ public class Member implements Parcelable
         AWAY
     }
 
-    public final static Parcelable.Creator<Member> CREATOR = new Creator<Member>() {
+    public final static Parcelable.Creator<User> CREATOR = new Creator<User>() {
 
 
         @SuppressWarnings({
             "unchecked"
         })
-        public Member createFromParcel(Parcel in) {
-            Member instance = new Member();
+        public User createFromParcel(Parcel in) {
+            User instance = new User();
             instance.id = ((String) in.readValue((String.class.getClassLoader())));
             instance.teamId = ((String) in.readValue((String.class.getClassLoader())));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
@@ -109,8 +109,8 @@ public class Member implements Parcelable
             return instance;
         }
 
-        public Member[] newArray(int size) {
-            return (new Member[size]);
+        public User[] newArray(int size) {
+            return (new User[size]);
         }
 
     }

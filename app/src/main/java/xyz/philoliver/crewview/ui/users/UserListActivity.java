@@ -43,7 +43,7 @@ public class UserListActivity extends CrewViewActivity {
         usersSubscription = slackService.getUsers(true)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(UsersResponse::getMembers)
+                .map(UsersResponse::getUsers)
                 .subscribe(users -> {
                     recyclerView.setAdapter(new UserListAdapter(users));
                 });

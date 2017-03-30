@@ -26,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import xyz.philoliver.crewview.R;
-import xyz.philoliver.crewview.model.Member;
+import xyz.philoliver.crewview.model.User;
 import xyz.philoliver.crewview.model.Profile;
 import xyz.philoliver.crewview.ui.CrewViewActivity;
 import xyz.philoliver.crewview.util.DeviceUtils;
@@ -38,14 +38,14 @@ public class UserDetailsActivity extends CrewViewActivity {
 
     public static final String USER_KEY = "user";
 
-    public static Intent getIntent(Context context, Member user) {
+    public static Intent getIntent(Context context, User user) {
         Intent intent = new Intent(context, UserDetailsActivity.class);
         intent.putExtra(USER_KEY, user);
 
         return intent;
     }
 
-    private Member user;
+    private User user;
 
     @BindView(R.id.avatar)
     ImageView avatar;
