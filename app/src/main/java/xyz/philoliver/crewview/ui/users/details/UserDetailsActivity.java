@@ -123,6 +123,7 @@ public class UserDetailsActivity extends CrewViewActivity {
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            // now that the avatar image is loaded, proceed with the shared element transition
                             supportStartPostponedEnterTransition();
                             return false;
                         }
@@ -144,7 +145,13 @@ public class UserDetailsActivity extends CrewViewActivity {
             Profile profile = user.getProfile();
 
             addDetail(profile.getTitle(), "Title", details);
-            addDetail(user.getTz(), "Timezone", details);
+
+            String timeZone = user.getTz();
+            if (TextUtils.isEmpty(timeZone)) {
+                timeZone = user.getTzLabel();
+            }
+
+            addDetail(timeZone, "Timezone", details);
             addDetail(profile.getEmail(), "Email", details);
             addDetail(profile.getPhone(), "Phone", details);
 
