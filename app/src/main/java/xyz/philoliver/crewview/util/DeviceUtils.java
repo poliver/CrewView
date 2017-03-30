@@ -13,6 +13,11 @@ import android.view.WindowManager;
 
 public class DeviceUtils {
 
+    /**
+     *
+     * @param context
+     * @return the width of the device screen
+     */
     public static int screenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -22,6 +27,11 @@ public class DeviceUtils {
         return size.x;
     }
 
+    /**
+     *
+     * @param context
+     * @return true if the device has a network connection, false otherwise
+     */
     public static boolean isNetworkConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)  context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

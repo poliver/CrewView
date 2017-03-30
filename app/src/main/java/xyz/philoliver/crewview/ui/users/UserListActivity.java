@@ -18,6 +18,9 @@ import xyz.philoliver.crewview.model.UsersResponse;
 import xyz.philoliver.crewview.network.SlackService;
 import xyz.philoliver.crewview.ui.CrewViewActivity;
 
+/**
+ * The main Activity that displays the user list
+ */
 public class UserListActivity extends CrewViewActivity {
 
     @BindView(R.id.recycler_view)

@@ -14,6 +14,8 @@ import xyz.philoliver.crewview.di.module.NetworkModule;
 
 /**
  * Created by Phil on 3/26/17.
+ *
+ * The Application class that houses Stetho, Dagger, and Calligraphy initialization for the app
  */
 
 public class CrewViewApplication extends Application {

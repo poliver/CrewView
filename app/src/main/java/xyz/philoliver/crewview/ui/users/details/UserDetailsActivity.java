@@ -3,6 +3,7 @@ package xyz.philoliver.crewview.ui.users.details;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
@@ -34,11 +35,21 @@ import xyz.philoliver.crewview.util.UserUtils;
 
 import static android.view.View.GONE;
 
+/**
+ * The Activity which displays details about the User
+ */
 public class UserDetailsActivity extends CrewViewActivity {
 
     public static final String USER_KEY = "user";
 
-    public static Intent getIntent(Context context, User user) {
+    /**
+     * Factory method to create the Intent to start this Activity
+     *
+     * @param context
+     * @param user the User whose details will be displayed
+     * @return the Intent to start this Activity
+     */
+    public static Intent getIntent(Context context, @NonNull User user) {
         Intent intent = new Intent(context, UserDetailsActivity.class);
         intent.putExtra(USER_KEY, user);
 
@@ -101,24 +112,26 @@ public class UserDetailsActivity extends CrewViewActivity {
     public void setupUserDetails() {
         List<UserDetailsAdapter.UserDetail> details = new ArrayList<>();
 
+        // Set this programmatically, since the XML attribute is not supported on API 16
         ViewCompat.setTransitionName(avatar, getString(R.string.avatar_transition));
 
+        // The backdrop is full bleed
         int size = DeviceUtils.screenWidth(this);
         Glide.with(this)
                 .load(user.getProfile().getImageOriginal())
-                .override(size, size) // keep aspect ratio square (same as user list screen), so transition looks fluid
+                .override(size, size) // Keep aspect ratio square (same as user list screen), so transition looks fluid
                 .placeholder(R.drawable.slack)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        // so app doesn't get deadlocked
+                        // So app doesn't get deadlocked
                         supportStartPostponedEnterTransition();
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        // now that the avatar image is loaded, proceed with the shared element transition
+                        // Now that the avatar image is loaded, proceed with the shared element transition
                         supportStartPostponedEnterTransition();
                         return false;
                     }
@@ -158,6 +171,13 @@ public class UserDetailsActivity extends CrewViewActivity {
         }
     }
 
+    /**
+     * Repeat logic to add a User detail to the provided list
+     *
+     * @param detail
+     * @param label
+     * @param details
+     */
     private void addDetail(String detail, String label, List<UserDetailsAdapter.UserDetail> details) {
         if (!TextUtils.isEmpty(detail)) {
             details.add(new UserDetailsAdapter.UserDetail(detail, label));

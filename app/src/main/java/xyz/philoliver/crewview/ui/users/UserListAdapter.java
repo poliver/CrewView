@@ -30,6 +30,8 @@ import xyz.philoliver.crewview.util.UserUtils;
 
 /**
  * Created by Phil on 3/26/17.
+ *
+ * The adapter that binds a User to a row View in the user list
  */
 
 public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
