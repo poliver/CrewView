@@ -3,9 +3,12 @@ package xyz.philoliver.crewview;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import xyz.philoliver.crewview.di.component.DaggerNetworkComponent;
 import xyz.philoliver.crewview.di.component.NetworkComponent;
+import xyz.philoliver.crewview.di.module.ApplicationModule;
 import xyz.philoliver.crewview.di.module.NetworkModule;
 
 
@@ -20,8 +23,11 @@ public class CrewViewApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        Stetho.initializeWithDefaults(this);
+
         networkComponent = DaggerNetworkComponent.builder()
                 .networkModule(new NetworkModule(getString(R.string.base_url)))
+                .applicationModule(new ApplicationModule(this))
                 .build();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()

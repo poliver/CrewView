@@ -7,6 +7,7 @@ buildscript {
         dagger = '2.10'
         retrofit = '2.2.0'
         butterKnife = '8.5.1'
+        stetho = '1.4.2'
     }
 
     repositories {

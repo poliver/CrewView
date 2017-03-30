@@ -3,6 +3,7 @@ package xyz.philoliver.crewview.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import xyz.philoliver.crewview.di.module.ApplicationModule;
 import xyz.philoliver.crewview.di.module.NetworkModule;
 import xyz.philoliver.crewview.ui.users.UserListActivity;
 
@@ -11,7 +12,7 @@ import xyz.philoliver.crewview.ui.users.UserListActivity;
  */
 
 @Singleton
-@Component(modules = NetworkModule.class)
+@Component(modules = {NetworkModule.class, ApplicationModule.class})
 public interface NetworkComponent {
 
     void inject(UserListActivity userListActivity);

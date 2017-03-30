@@ -64,5 +64,9 @@ dependencies {
 
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
+    // Stetho
+    compile "com.facebook.stetho:stetho:$stetho"
+    compile "com.facebook.stetho:stetho-okhttp3:$stetho"
+
     testCompile 'junit:junit:4.12'
 }
