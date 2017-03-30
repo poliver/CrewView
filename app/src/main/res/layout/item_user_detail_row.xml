@@ -11,8 +11,7 @@
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="17sp"
+        style="@style/Detail"
         tools:text="polivergt@gmail.com"/>
 
     <TextView
@@ -20,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textSize="15sp"
+        style="@style/DetailLabel"
         tools:text="Email"/>
 
 </LinearLayout>
