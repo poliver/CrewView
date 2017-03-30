@@ -21,6 +21,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import xyz.philoliver.crewview.R;
 import xyz.philoliver.crewview.model.Member;
 import xyz.philoliver.crewview.model.Profile;
+import xyz.philoliver.crewview.util.UserUtils;
 
 /**
  * Created by Phil on 3/26/17.
@@ -72,6 +73,7 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
             Resources resources = context.getResources();
             Profile profile = user.getProfile();
 
+            //TODO: image not present?
             Glide.with(context)
                     .load(profile.getImage72())
                     .centerCrop()
@@ -80,7 +82,7 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
                     .into(avatar);
 
             name.setText(user.getRealName());
-            status.setActivated(profile.getAlwaysActive() == Boolean.TRUE || user.getPresence() == Member.Presence.ACTIVE);
+            status.setActivated(UserUtils.isActive(user));
 
             itemView.setOnClickListener(view -> {
                 context.startActivity(UserDetailsActivity.getIntent(context, user));

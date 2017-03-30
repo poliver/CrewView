@@ -33,7 +33,7 @@ public class Member implements Parcelable
     private String realName;
     @SerializedName("tz")
     @Expose
-    private Object tz;
+    private String tz;
     @SerializedName("tz_label")
     @Expose
     private String tzLabel;
@@ -93,7 +93,7 @@ public class Member implements Parcelable
             instance.status = ((Object) in.readValue((Object.class.getClassLoader())));
             instance.color = ((String) in.readValue((String.class.getClassLoader())));
             instance.realName = ((String) in.readValue((String.class.getClassLoader())));
-            instance.tz = ((Object) in.readValue((Object.class.getClassLoader())));
+            instance.tz = ((String) in.readValue((String.class.getClassLoader())));
             instance.tzLabel = ((String) in.readValue((String.class.getClassLoader())));
             instance.tzOffset = ((Long) in.readValue((Long.class.getClassLoader())));
             instance.profile = ((Profile) in.readValue((Profile.class.getClassLoader())));
@@ -172,11 +172,11 @@ public class Member implements Parcelable
         this.realName = realName;
     }
 
-    public Object getTz() {
+    public String getTz() {
         return tz;
     }
 
-    public void setTz(Object tz) {
+    public void setTz(String tz) {
         this.tz = tz;
     }
 

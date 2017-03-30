@@ -3,5 +3,6 @@
     <string name="app_name">Crew View</string>
 
     <string name="base_url">https://slack.com/api/</string>
+    <string name="username">\@%1$s</string>
 
 </resources>
