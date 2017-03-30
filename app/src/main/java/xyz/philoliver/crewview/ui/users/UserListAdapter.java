@@ -57,6 +57,11 @@ public class UserListAdapter extends Adapter<UserListAdapter.UserViewHolder> {
         return users.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     class UserViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.avatar)
