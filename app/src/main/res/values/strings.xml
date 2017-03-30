@@ -1,10 +1,11 @@
 <resources>
 
     <string name="app_name">Crew View</string>
-
     <string name="base_url">https://slack.com/api/</string>
     <string name="username">\@%1$s</string>
-
     <string name="avatar_transition">avatar_transition</string>
+    <string name="timezone">Timezone</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
 
 </resources>

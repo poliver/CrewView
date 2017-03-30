@@ -147,9 +147,9 @@ public class UserDetailsActivity extends CrewViewActivity {
             timeZone = user.getTzLabel();
         }
 
-        addDetail(timeZone, "Timezone", details);
-        addDetail(profile.getEmail(), "Email", details);
-        addDetail(profile.getPhone(), "Phone", details);
+        addDetail(timeZone, getString(R.string.timezone), details);
+        addDetail(profile.getEmail(), getString(R.string.email), details);
+        addDetail(profile.getPhone(), getString(R.string.phone), details);
 
         if (!details.isEmpty()) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
